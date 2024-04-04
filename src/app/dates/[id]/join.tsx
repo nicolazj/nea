@@ -80,13 +80,13 @@ export async function Join({ date }: { date: Tables<"dates"> }) {
           <form action={unattend}>
             <input name="date_id" value={date.id} type="hidden" />
             <Button className="text-3xl h-auto p-4">
-              No, I've changed my mind{" "}
+             {`No, I've changed my mind`}
             </Button>
           </form>
         ) : (
           <form action={attend}>
             <input name="date_id" value={date.id} type="hidden" />
-            <Button className="text-3xl h-auto p-4">Yessss!, I'm going </Button>
+            <Button className="text-3xl h-auto p-4">{`Yessss!, I'm going`} </Button>
           </form>
         )}
       </div>

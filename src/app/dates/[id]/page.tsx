@@ -64,7 +64,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           </a>
         </div>
       </div>
-      <p>Who's going:</p>
+      <p>{`Who's going:`}</p>
       {date.attendances.map((att) => {
         let profile = att.profiles;
         return (
