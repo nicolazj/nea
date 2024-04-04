@@ -18,7 +18,7 @@ export function Loggedin() {
         <Link href={"/new"}>Create a date</Link>
       </Button>
 
-      <form method="GET" action="/auth/signout">
+      <form method="POST" action="/auth/signout">
         <Button variant={"secondary"}>Log out</Button>
       </form>
     </div>

@@ -40,7 +40,6 @@ export async function GET(request: Request) {
         .eq("id", user.id);
     }
   }
-console.log(redirect)
   // URL to redirect to after sign up process completes
   return NextResponse.redirect(redirect ? origin + redirect : origin);
 }
