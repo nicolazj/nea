@@ -1,18 +1,6 @@
-import { createClient } from "@/utils/supabase/server";
-import Login from "./login/page";
-import { redirect } from "next/navigation";
 import { DateList } from "@/components/date-list";
 
 export default async function Home() {
-  // let supabase = createClient();
-  // let resp = await supabase.auth.getUser();
-
-  // let { data } = resp;
-  // let { user } = data;
-
-  // if (user) {
-  //   return redirect("/home");
-  // }
   return (
     <div className="container ">
       <div className="grid text-center gap-8 mb-8">
