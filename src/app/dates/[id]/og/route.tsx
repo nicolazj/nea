@@ -36,10 +36,17 @@ export async function GET(
       .eq("id", id)
       .limit(1)
       .single();
-    if (!date) return null;
+    if (!date)
+      return new ImageResponse(
+        <div tw="bg-black flex flex-col w-full h-full gap-4 p-8" />,
+        {
+          width: 1200,
+          height: 630,
+        }
+      );
     return new ImageResponse(
       (
-        <div tw="bg-black flex flex-col w-full h-full gap-4 p-8" style={{}}>
+        <div tw="bg-black flex flex-col w-full h-full gap-4 p-8">
           <div tw="flex text-[40px] text-white">{date?.where}</div>
           <div tw="flex text-[40px] text-white">{formatTime(date.when!)}</div>
           <div tw="flex text-[40px] text-white">{date?.what}</div>
