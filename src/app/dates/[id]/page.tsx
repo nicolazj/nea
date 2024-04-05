@@ -3,8 +3,14 @@ import { Button } from "@/components/ui/button";
 import { createClient } from "@/utils/supabase/server";
 import Image from "next/image";
 import { Join } from "./join";
+import { ResolvingMetadata, Metadata } from "next";
 
-export default async function Page({ params }: { params: { id: string } }) {
+type Props = {
+  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export default async function Page({ params }: Props) {
   let supabase = createClient();
 
   let { data: date } = await supabase
@@ -101,3 +107,44 @@ export default async function Page({ params }: { params: { id: string } }) {
 }
 
 export const dynamic = "force-dynamic";
+
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+ 
+  let supabase = createClient();
+
+  let { data: date } = await supabase
+    .from("dates")
+    .select(
+      `
+    *,
+     host:profiles!fk_created_by (
+       id,
+       name,
+       picture,
+       vanity_name, 
+       title
+     ),
+     attendances(
+        profiles!public_attendances_user_id_fkey(
+          *
+        )
+     )
+   `
+    )
+    .eq("id", params.id)
+    .limit(1)
+    .single();
+ 
+
+ 
+  return {
+    title:date?.what,
+    openGraph: {
+      images: [`/dates/${params.id}/og`],
+    },
+  }
+}
